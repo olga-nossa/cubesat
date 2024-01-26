@@ -10,7 +10,7 @@ void setup(void)
 {
   Serial.begin(9600);
   
-  ads.setGain(GAIN_TWOTHIRDS);  // 2/3 ganancia - voltage de referencia: 6.144V - 1 bit = 0.1875mV
+  ads.setGain(GAIN_TWOTHIRDS);  // 2/3 ganancia - voltaje de referencia: 6.144V - 1 bit = 0.1875mV
 
   if (!ads.begin()) {
     Serial.println("Failed to initialize ADS.");
