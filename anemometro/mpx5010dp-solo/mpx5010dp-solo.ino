@@ -21,5 +21,5 @@ void loop()
    }
   Vout=aux/10.0;
 
-  P = ( Vout - 0.04*Vs ) / (0.09 * Vs) + tolP; //Valor de la diferencia de presión usando la función de transferencia.
+  P = ( Vout - 0.04 * Vs ) / (0.09 * Vs) + tolP; //Valor de la diferencia de presión usando la función de transferencia.
 }
