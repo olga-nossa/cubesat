@@ -2,7 +2,7 @@
 Adafruit_ADS1115 ads;
 
 double P0, P1, P2, P3, Vs = 5.0;
-double tolP = 0.04; // Este valor se debe determinar
+double tolP = 0.2; // Este valor se determinó con el datasheet
 double V0, V1, V2, V3;
 int rho = 1.225;
 
@@ -21,7 +21,7 @@ void setup(void)
 void loop(void)
 {
   int16_t adc0, adc1, adc2, adc3; // se declaran como variables que representan números enteros de 16 bits con signo
-  float volts0, volts1, volts2, volts3;
+  float volts0, volts1, volts2, volts3, volts0prima;
 
   // esta función lee la señal analógica
   adc0 = ads.readADC_SingleEnded(0);
@@ -35,21 +35,22 @@ void loop(void)
   volts2 = ads.computeVolts(adc2);
   volts3 = ads.computeVolts(adc3);
 
-  // se calcula el valor de la diferencia de presión
-  P0 = (( volts0 - 0.04 * Vs ) / (0.09 * Vs) + tolP) * 1000;
-  P1 = (( volts1 - 0.04 * Vs ) / (0.09 * Vs) + tolP) * 1000;
-  P2 = (( volts2 - 0.04 * Vs ) / (0.09 * Vs) + tolP) * 1000;
-  P3 = (( volts3 - 0.04 * Vs ) / (0.09 * Vs) + tolP) * 1000;
+  // se calcula el valor de la diferencia de presión [Pa]
+  P0 = ((( volts0 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
+  P1 = ((( volts1 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
+  P2 = ((( volts2 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
+  P3 = ((( volts3 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
 
-  // se calcula la magnitud de la velocidad del viento
+  // se calcula la magnitud de la velocidad del viento [m/s]
   V0 = sqrt(2 * P0/rho);
   V1 = sqrt(2 * P1/rho);
   V2 = sqrt(2 * P2/rho);
   V3 = sqrt(2 * P3/rho);
   
-  Serial.print("ΔP0: "); Serial.print(P0); Serial.print("  "); Serial.print("VEL0: "); Serial.println(V0);
-  Serial.print("ΔP1: "); Serial.print(P1); Serial.print("  "); Serial.print("VEL1: "); Serial.println(V1);
-  Serial.print("ΔP2: "); Serial.print(P2); Serial.print("  "); Serial.print("VEL2: "); Serial.println(V2);
-  Serial.print("ΔP3: "); Serial.print(P3); Serial.print("  "); Serial.print("VEL3: "); Serial.println(V3);
+  Serial.print("1. digital: "); Serial.print(adc0); Serial.print(" Voltaje: "); Serial.print(volts0); Serial.print(" ΔP0: "); Serial.print(P0); Serial.print("  "); Serial.print(" VEL0: "); Serial.println(V0;
+  Serial.print("2. digital: "); Serial.print(adc1); Serial.print(" Voltaje: "); Serial.print(volts1); Serial.print(" ΔP1: "); Serial.print(P1); Serial.print("  "); Serial.print("VEL1: "); Serial.println(V1);
+  Serial.print("3 .digital: "); Serial.print(adc2); Serial.print(" Voltaje: "); Serial.print(volts2); Serial.print(" ΔP2: "); Serial.print(P2); Serial.print("  "); Serial.print("VEL2: "); Serial.println(V2);
+  Serial.print("4. digital: "); Serial.print(adc3); Serial.print(" Voltaje: "); Serial.print(volts3); Serial.print(" ΔP3: "); Serial.print(P3); Serial.print("  "); Serial.print("VEL3: "); Serial.println(V3);
 
+  delay(100);
 }
