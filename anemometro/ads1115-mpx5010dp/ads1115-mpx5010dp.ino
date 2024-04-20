@@ -1,3 +1,12 @@
+/*
+Este es el código el ADC que leerá la señal de los sensores de presión diferencial.
+
+ADS1115 (ADC):
+Se comunica con protocolo I2C con dirección 0x48 (es posible cambiarla)
+
+MPX5010DP (Sensor de presión diferencial):
+Se usarán 4 sensores MPX5010DP, cada uno conectado a las 4 entras analógicas del ADS1115
+*/
 #include <Adafruit_ADS1X15.h>
 Adafruit_ADS1115 ads;
 

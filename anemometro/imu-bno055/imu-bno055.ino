@@ -1,3 +1,9 @@
+/*
+En este archivo se desarrolla el código de la IMU BNO055 que usa protocolo de comunicación I2C
+con dirección 0x29 (es posible cambiarla a 0x28)
+
+Este código es preliminar debido a que no se ha probado con la IMU
+*/
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
