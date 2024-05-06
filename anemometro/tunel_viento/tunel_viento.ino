@@ -8,7 +8,10 @@
 Adafruit_ADS1115 ads;
 double P0, P1, P2, P3;
 double V0, V1, V2, V3;
-#define tolP 0.2 // Este valor ES EL ERROR SE PUEDE VARIAR
+#define tolSensor0 225 // Este valor ES EL ERROR Y SE DEBE AJUSTAR
+#define tolSensor1 225 // Este valor ES EL ERROR Y SE DEBE AJUSTAR
+#define tolSensor2 225 // Este valor ES EL ERROR Y SE DEBE AJUSTAR
+#define tolSensor3 225 // Este valor ES EL ERROR Y SE DEBE AJUSTAR
 #define Vs 5.0
 #define rho 1.225
 
@@ -35,10 +38,10 @@ void signal_read(float& volts0, float& volts1, float& volts2, float& volts3, int
 
 void calculation(float volts0, float volts1, float volts2, float volts3, float adc0, float adc1, float adc2, float adc3){
   // se calcula el valor de la diferencia de presión [Pa]
- P0 = ((( volts0 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
- P1 = ((( volts1 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
- P2 = ((( volts2 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
- P3 = ((( volts3 - 0.04 * Vs ) / (0.09 * Vs))+ tolP);
+  P0 = 1000 * (( volts0 - 0.04 * Vs ) / (0.09  * Vs))- tolSensor0;
+  P1 = 1000 * (( volts1 - 0.04 * Vs ) / (0.09  * Vs))- tolSensor1;
+  P2 = 1000 * (( volts2 - 0.04 * Vs ) / (0.09  * Vs))- tolSensor2;
+  P3 = 1000 * (( volts3 - 0.04 * Vs ) / (0.09  * Vs))- tolSensor3;
 
  // se calcula la magnitud de la velocidad del viento [m/s]
  V0 = sqrt(2 * P0/rho);

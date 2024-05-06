@@ -42,10 +42,10 @@ void signal_read(float& volts0, float& volts1, float& volts2, float& volts3, int
 
 void calculation(float volts0, float volts1, float volts2, float volts3, float adc0, float adc1, float adc2, float adc3){
   // se calcula el valor de la diferencia de presión [Pa]
-  P0 = ((( volts0 - value1 * Vs ) / (value2  * Vs))+ tolP);
-  P1 = ((( volts1 - value1 * Vs ) / (value2  * Vs))+ tolP);
-  P2 = ((( volts2 - value1 * Vs ) / (value2  * Vs))+ tolP);
-  P3 = ((( volts3 - value1 * Vs ) / (value2  * Vs))+ tolP);
+  P0 = 1000 * (( volts0 - value1 * Vs ) / (value2  * Vs))- tolP;
+  P1 = 1000 * (( volts1 - value1 * Vs ) / (value2  * Vs))- tolP;
+  P2 = 1000 * (( volts2 - value1 * Vs ) / (value2  * Vs))- tolP;
+  P3 = 1000 * (( volts3 - value1 * Vs ) / (value2  * Vs))- tolP;
 
   // se calcula la magnitud de la velocidad del viento [m/s]
   V0 = sqrt(2 * P0/rho);
