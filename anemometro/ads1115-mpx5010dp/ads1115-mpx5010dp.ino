@@ -74,4 +74,6 @@ void loop()
   calculation(volts0, volts1, volts2, volts3, adc0, adc1, adc2, adc3); // Esta función calcula  diferencia de presión y velocidad del viento
   /* La función calculation realiza cálculos que pueden ser realizados en la estación terrena.
   El único valor que debe calcular el microcontrolador el cubesat es la lectura de la señal analógica */
+
+  delay(1000);
 }
