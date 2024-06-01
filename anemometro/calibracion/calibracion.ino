@@ -22,10 +22,10 @@ void loop() {
   adc = ads.readADC_SingleEnded(0); //cambiar entrada que está entre paréntesis
   volts = ads.computeVolts(adc);
   P = 1000 * (( volts - 0.04 * Vs ) / (0.09  * Vs)); //ajustar tolerancia
-  V = sqrt(2 * P0/rho);
+  V = sqrt(2 * P/rho);
 
   Serial.print("digital: "); Serial.print(adc);
-  Serial.print(" voltaje: "); Serial.print(volts);
-  Serial.print(" ΔP0: "); Serial.print(P);
-  Serial.print(" velocidad "); Serial.println(V);
+  Serial.print(" voltaje: "); Serial.print(volts,6);
+  Serial.print(" ΔP0: "); Serial.print(P,6);
+  Serial.print(" velocidad "); Serial.println(V,6);
 }
