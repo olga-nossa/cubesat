@@ -18,13 +18,21 @@ void setup_sensor(bfs::Ms4525do& sensor, int sensor_number){
 // función para leer e imprimir los datos de presión y temperatura
 void read_sensor(bfs::Ms4525do& sensor, int sensor_number){
   if (sensor.Read()) {
-    Serial.print("Sensor "); Serial.print(sensor_number); Serial.print(" presion [Pa]: ");
+//    Serial.print("Sensor "); Serial.print(sensor_number); Serial.print(" presion [Pa]: ");
+//    Serial.print(sensor.pres_pa(), 6);
+//    Serial.print("\t");
+//    
+//    Serial.print("tempe [°C]: ");
+//    Serial.print(sensor.die_temp_c(), 6);
+//    Serial.print("\n");
+    Serial.print(sensor.pres_cnts());
+    Serial.print("/");
     Serial.print(sensor.pres_pa(), 6);
-    Serial.print("\t");
+    Serial.print("/");
+    Serial.print(sqrt(2/1.006 * sensor.pres_pa()), 6);
+    Serial.print("/");
+    Serial.println(sensor.die_temp_c(), 6);
     
-    Serial.print("tempe [°C]: ");
-    Serial.print(sensor.die_temp_c(), 6);
-    Serial.print("\n");
   }
 }
 
@@ -48,4 +56,5 @@ void setup() {
 void loop() {
   tcaselect(0); // se selecciona el bus 0 del multiplexor
   read_sensor(sensor1, 1); // se llama la función read_sensor para leer los datos del sensor 1
+  delay(300);
 }

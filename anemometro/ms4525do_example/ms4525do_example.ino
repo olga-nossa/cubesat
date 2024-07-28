@@ -48,21 +48,29 @@ void loop() {
   /* Read the sensor */
   if (pres.Read()) {
     /* Display the data */
-    Serial.print("presion [Pa]: ");
-    Serial.print(pres.pres_pa(), 6);
-    Serial.print("\t");
-    
-    //Serial.print("tempe: ");
-    //Serial.print(pres.die_temp_c(), 6);
-    //Serial.print("\t");
+//    Serial.print("presion [Pa]: ");
+//    Serial.print(pres.pres_pa(), 6);
+//    Serial.print("\t");
+//    
+//    //Serial.print("tempe: ");
+//    //Serial.print(pres.die_temp_c(), 6);
+//    //Serial.print("\t");
+//
+//    Serial.print("presion [psi]: ");
+//    Serial.print(pres.pres_psi(), 6);
+//    Serial.print("\t");
+//
+//    Serial.print("digital: ");
+//    Serial.print(pres.pres_cnts());
+//    Serial.print("\n");
 
-    Serial.print("presion [psi]: ");
-    Serial.print(pres.pres_psi(), 6);
-    Serial.print("\t");
-
-    Serial.print("digital: ");
     Serial.print(pres.pres_cnts());
-    Serial.print("\n");
+    Serial.print("/");
+    Serial.print(pres.pres_pa(), 6);
+    Serial.print("/");
+    Serial.print(sqrt(2 * pres.pres_pa()), 6);
+    Serial.print("/");
+    Serial.println(pres.die_temp_c(), 6);
   }
   delay(100);
 }
