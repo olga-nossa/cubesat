@@ -21,33 +21,48 @@ void setup_sensor(bfs::Ms4525do& sensor, int sensor_number) {
 }
 
 // función para leer e imprimir los datos de presión y temperatura
-void read_sensor(bfs::Ms4525do& sensor, int sensor_number) {
+void read_sensor_pressure(bfs::Ms4525do& sensor, int sensor_number) {
   if (sensor.Read()) {
-    Serial.print("Sensor_");
-    Serial.print(sensor_number);
-    Serial.print(": ");
+    //Serial.print("Sensor_");
+    //Serial.print(sensor_number);
+    //Serial.print(": ");
     
     //Serial.print(" presion [Pa]: ");
-    //Serial.print(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
-    //Serial.print(",");
+    Serial.print(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
+    Serial.print(",");
     
     //Serial.print("tempe [°C]: ");
     //Serial.print(sensor.die_temp_c(), 6); // se imprime el valor con 6 decimales
     //Serial.print(",");
 
+//    if(sensor_number != 4){
+//      //Serial.print(" presion [Pa]: ");
+//      Serial.print(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
+//      Serial.print(",");
+//    }
+//       
+//    if(sensor_number == 4){
+//      //Serial.print(" presion [Pa]: ");
+//      Serial.println(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
+//      //Serial.println(",");
+//    }
+  }
+}
+
+void read_sensor_temp(bfs::Ms4525do& sensor, int sensor_number) {
+  if (sensor.Read()) {
     if(sensor_number != 4){
       //Serial.print(" presion [Pa]: ");
-      Serial.print(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
+      Serial.print(sensor.die_temp_c(), 6); // se imprime el valor con 6 decimales
       Serial.print(",");
     }
        
     if(sensor_number == 4){
       //Serial.print(" presion [Pa]: ");
-      Serial.println(sensor.pres_pa(), 6); // se imprime el valor con 6 decimales
-      //Serial.println(",");
+      Serial.println(sensor.die_temp_c(), 6); // se imprime el valor con 6 decimales
+    }
     }
   }
-}
 
 // función para seleccionar el bus I2C del multiplexor
 void tcaselect(uint8_t i) {
@@ -76,15 +91,28 @@ void setup() {
 }
 
 void loop() {
-  tcaselect(0); // se selecciona el bus 0 del multiplexor
-  read_sensor(sensor1, 1); // llama la función read_sensor para leer los datos del sensor 1
+  tcaselect(0); // se selecciona el bus 0 del multiplexor 
+  read_sensor_pressure(sensor1, 1); // llama la función read_sensor para leer los datos del sensor 1
   
   tcaselect(1); // se selecciona el bus 1 del multiplexor
-  read_sensor(sensor2, 2); // llama la función read_sensor para leer los datos del sensor 2
+  read_sensor_pressure(sensor2, 2); // llama la función read_sensor para leer los datos del sensor 2
   
   tcaselect(2); // se selecciona el bus 2 del multiplexor
-  read_sensor(sensor3, 3); // llama la función read_sensor para leer los datos del sensor 3
+  read_sensor_pressure(sensor3, 3); // llama la función read_sensor para leer los datos del sensor 3
   
   tcaselect(7); // se selecciona el bus 3 del multiplexor
-  read_sensor(sensor4, 4); // llama la función read_sensor para leer los datos del sensor 4
+  read_sensor_pressure(sensor4, 4); // llama la función read_sensor para leer los datos del sensor 4
+
+  tcaselect(0); // se selecciona el bus 0 del multiplexor 
+  read_sensor_temp(sensor1, 1); // llama la función read_sensor para leer los datos del sensor 1
+  
+  tcaselect(1); // se selecciona el bus 1 del multiplexor
+  read_sensor_temp(sensor2, 2); // llama la función read_sensor para leer los datos del sensor 2
+  
+  tcaselect(2); // se selecciona el bus 2 del multiplexor
+  read_sensor_temp(sensor3, 3); // llama la función read_sensor para leer los datos del sensor 3
+  
+  tcaselect(7); // se selecciona el bus 3 del multiplexor
+  read_sensor_temp(sensor4, 4); // llama la función read_sensor para leer los datos del sensor 4
+
 }
