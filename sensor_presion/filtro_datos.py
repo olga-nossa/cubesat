@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from collections import deque
 
 # Leer datos desde un archivo Excel
-file_path = '/home/olga/Escritorio/sensor_presion/presiones.ods'  # Ruta archivo
+file_path = '/home/olga/Escritorio/cubesat/sensor_presion/presiones.ods'  # Ruta archivo
 data = pd.read_excel(file_path, usecols=[0], header=None)  # Lee la primera columna
 data = data.squeeze().values  # Convierte a un array de numpy
 
