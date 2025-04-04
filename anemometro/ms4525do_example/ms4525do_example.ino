@@ -66,11 +66,15 @@ void loop() {
 
     //Serial.print(pres.pres_cnts());
     //Serial.print("/");
-    Serial.println(pres.pres_pa(), 6);
+    Serial.print(pres.pres_pa(), 6);
     //Serial.print("/");
     //Serial.print(sqrt(2 * pres.pres_pa()), 6);
     //Serial.print("/");
     //Serial.println(pres.die_temp_c(), 6);
+
+    Serial.print(",0, 0, 0, ");
+    Serial.print(pres.die_temp_c(), 6);
+    Serial.println(",0, 0, 0");
   }
   //delay(100);
 }
